@@ -8,3 +8,7 @@ Below is the sketch for the login page, a gamestate, and the leaderboard/end pag
 ![This is an image](/IMG_1031.jpg)
 
 Also, I hope it doesn't matter too much that I overrode the old text I had from the Github assignment. Sorry about that, I promise I had it.
+
+NOTES ON SIMON HTML:
+
+It was interesting to me how much simpler HTML is than I was expecting. But it also seems limited on its own, so it makes a lot more sense why we're learning CSS and JavaScript as well. I was also swamped with other homework while I was working on this, so while I may not have done a lot of it manually, seeing all the code needed to make the simple Simon shapes in HTML emphasized to me the necessity of the other languages and systems we use to supplement it.
