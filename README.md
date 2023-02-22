@@ -12,3 +12,6 @@ Also, I hope it doesn't matter too much that I overrode the old text I had from 
 NOTES ON SIMON HTML:
 
 It was interesting to me how much simpler HTML is than I was expecting. But it also seems limited on its own, so it makes a lot more sense why we're learning CSS and JavaScript as well. I was also swamped with other homework while I was working on this, so while I may not have done a lot of it manually, seeing all the code needed to make the simple Simon shapes in HTML emphasized to me the necessity of the other languages and systems we use to supplement it.
+
+NOTES ON SIMON CSS: 
+It was neat to actually make it not look kinda like barf? Though it definitely feels weird to me after doing so much coding without worrying about UX in my other classes, but I guess that's why we work on it here.
