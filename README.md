@@ -19,3 +19,6 @@ It was neat to actually make it not look kinda like barf? Though it definitely f
 
 NOTES ON STARTUP HTML AND CSS:
 There are still some bugs and jankyness with the styling, but its starting to look almost functional to me at least. On the play page there's supposed to be a color swatch to guess from, but since I can't get that to show up I also haven't added the example swatches and values, so those will have to wait. This process is starting to make a bit more sense, but I've been pretty stretched already with my calc and cs235 classes...
+
+NOTES ON SIMON JS:
+It seems both really foreigh still, but also simple? Going over the provided code made me see where I need to watch to keep myself from overcomplicating this whole thing.
