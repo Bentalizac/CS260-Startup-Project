@@ -1,17 +1,18 @@
 .swatch {
-  width: 100px;
-  height: 100px;
-  background-color: red;
-  justify-content: center;
-  align-items: center;
-}
-#box {
-  width: 800px;
-  height: 800px;
   display: flex;
 
+  justify-content: center;
 }
  
+#box{
+  width: 100px;
+  height: 100px;
+  display: flex;
+  background-color: red;
+
+
+}
+
 body {
     display: flex;
     flex-direction: column;

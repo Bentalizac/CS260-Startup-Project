@@ -40,26 +40,28 @@
                     <p>Welcome! Displayed below is a color swatch,</p> your goal is to guess the RGB values of that color
                 </h1>
                 <div class="swatch">
-                    <div id="box"></div>
+                  <div id="box"></div>
                 </div>
                 <p>R Value:</p>
                 <form method="get">
                     <input type="text" id="r_value" placeholder="How much red is there?" />
-                    <button type="submit" class="btn btn-danger">Submit</button>
+                    <button type="submit" class="btn btn-danger" onclick = "getRed()">Submit</button>
                 </form>
                 <p>G Value:</p>
                 <form method="get">
-                    <input type="text" id="r_value" placeholder="How much green is there?" />
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <input type="text" id="g_value" placeholder="How much green is there?" />
+                    <button type="submit" class="btn btn-success" onclick = "getGreen()">Submit</button>
                 </form>
                 <p>B Value:</p>
                 <form method="get">
-                    <input type="text" id="r_value" placeholder="How much blue is there?" />
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <input type="text" id="b_value" placeholder="How much blue is there?" />
+                    <button type="submit" class="btn btn-primary" onclick = "getBlue()">Submit</button>
                 </form>
             </div>
         </main>
 
+
+        <script src="running.js"></script>
     </body>
 
     <footer class="bg-dark text-dark text-muted">
