@@ -41,10 +41,12 @@
                 <p> Please provide a username to begin</p>
                 
                 <form method="get" action="play.html">
-                    <input type="text" id="name" name= "username" placeholder="Username Here" />
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <input type="text" id="username" name= "name" placeholder="Username Here" />
+                    <button type="submit" id="login" onclick="login()" class="btn btn-primary">Login</button>
                 </form>
             </div>
+
+            <script src="login.js"></script>
         </main>
 
     <footer class="bg-dark text-dark text-muted">

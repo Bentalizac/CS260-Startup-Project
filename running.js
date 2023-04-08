@@ -1,9 +1,35 @@
 
-
-let RGBvals = [
+let sessionInfo = [
     {red: 0, green: 0, blue: 0},
     {red: 0, green: 0, blue: 0},
+    {username: "John Doe"}
   ];
+
+
+  const redSubmit = document.getElementById("r_button");
+  redSubmit.addEventListener("click", event => {
+    event.preventDefault();
+    const redVal = document.getElementById("r_value").value;
+    sessionInfo[1].red = parseInt(redVal);
+    console.log(sessionInfo[1].red)
+  });
+
+  const greenSubmit = document.getElementById("g_button");
+  greenSubmit.addEventListener("click", event => {
+    event.preventDefault();
+    const greenVal = document.getElementById("g_value").value;
+    sessionInfo[1].green = parseInt(greenVal);
+    console.log(sessionInfo[1].green)
+  });
+
+  const blueSubmit = document.getElementById("b_button");
+  blueSubmit.addEventListener("click", event => {
+    event.preventDefault();
+    const blueVal = document.getElementById("b_value").value;
+    sessionInfo[1].blue = parseInt(blueVal);
+    console.log(sessionInfo[1].blue)
+  });
+
 
 function generateRandomInteger(max) {
     return Math.floor(Math.random() * max) + 1;
@@ -12,30 +38,51 @@ function generateRandomInteger(max) {
  
 
 function setRGB() {
+
+    function RandRGB() {
+        return generateRandomInteger(255);
+    }
+
     const red = RandRGB();
     const blue = RandRGB();
     const green = RandRGB();
 
-    RGBvals[0].red = red;
-    RGBvals[0].green = green;
-    RGBvals[0].blue = blue;
+    sessionInfo[0].red = red;
+    sessionInfo[0].green = green;
+    sessionInfo[0].blue = blue;
+
+// get the color swatch element
+const colorSwatch = document.getElementById("box");
+
+// set the backgroundColor property to the new RGB values
+colorSwatch.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+
 }
-  function getRed() {
-    const redVal = document.getElementById("r_value").value;
-    RGBvals[1].red = parseInt(redVal);
-    console.log(RGBvals)
+  function compareRGB() {
+    const randRed = sessionInfo[0].red;
+    const randGreen = sessionInfo[0].green;
+    const randBlue = sessionInfo[0].blue;
+  
+    const userRed = sessionInfo[1].red;
+    const userGreen = sessionInfo[1].green;
+    const userBlue = sessionInfo[1].blue;
+  
+    const redDiff = Math.abs(randRed - userRed);
+    const greenDiff = Math.abs(randGreen - userGreen);
+    const blueDiff = Math.abs(randBlue - userBlue);
+  
+    const accuracy = ((255 - redDiff) / 255) * 0.3 + ((255 - greenDiff) / 255) * 0.59 + ((255 - blueDiff) / 255) * 0.11;
+  
+    return accuracy.toFixed(2);
   }
+  
+// STUFF FOR SCORES PAGE
+function scores() {
 
-  function getBlue() {
-    const blueVal = document.getElementById("b_value").value;
-    RGBvals[1].blue = parseInt(blueVal);
-    console.log(RGBvals)
-  }
+    sessionInfo[2].name = JSON.parse(localStorage.getItem("userName"));
+    localStorage.setItem('sessionInfo', JSON.stringify(sessionInfo));
+    window.location.href = "scores.html";
 
-  function getGreen() {
-    const greenVal = document.getElementById("g_value").value;
-    RGBvals[1].green = parseInt(greenVal);
-    console.log(RGBvals)
-    
-  }
+}
+
 

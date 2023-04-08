@@ -43,25 +43,36 @@
                   <div id="box"></div>
                 </div>
                 <p>R Value:</p>
-                <form method="get">
+                <form>
                     <input type="text" id="r_value" placeholder="How much red is there?" />
-                    <button type="submit" class="btn btn-danger" onclick = "getRed()">Submit</button>
+                    <button type="submit" id="r_button" class="btn btn-danger">Submit</button>
                 </form>
                 <p>G Value:</p>
-                <form method="get">
+                <form>
                     <input type="text" id="g_value" placeholder="How much green is there?" />
-                    <button type="submit" class="btn btn-success" onclick = "getGreen()">Submit</button>
+                    <button type="submit" id="g_button" class="btn btn-success">Submit</button>
                 </form>
                 <p>B Value:</p>
-                <form method="get">
+                <form>
                     <input type="text" id="b_value" placeholder="How much blue is there?" />
-                    <button type="submit" class="btn btn-primary" onclick = "getBlue()">Submit</button>
+                    <button type="submit" id="b_button" class="btn btn-primary">Submit</button>
                 </form>
+                <p>Click below to see your results!</p>
+
+                <form method="get" action="scores.html">
+                  <button type="submit" onclick="scores()" id="results" class="btn btn-primary">How did you do?</button>
+              </form>
+
             </div>
         </main>
 
 
         <script src="running.js"></script>
+        <script>
+          window.onload = function() {
+            setRGB();
+          };
+        </script>
     </body>
 
     <footer class="bg-dark text-dark text-muted">
