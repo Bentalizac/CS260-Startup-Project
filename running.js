@@ -2,9 +2,10 @@
 let sessionInfo = [
     {red: 0, green: 0, blue: 0},
     {red: 0, green: 0, blue: 0},
-    {username: "John Doe"}
+    {username: localStorage.getItem("userName")}
   ];
 
+document.getElementById("usernameHere").append(sessionInfo[2].username);
 
   const redSubmit = document.getElementById("r_button");
   redSubmit.addEventListener("click", event => {
@@ -79,7 +80,23 @@ colorSwatch.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
 // STUFF FOR SCORES PAGE
 function scores() {
 
-    sessionInfo[2].name = JSON.parse(localStorage.getItem("userName"));
+    const redVal = document.getElementById("r_value").value;
+    sessionInfo[1].red = parseInt(redVal);
+    console.log(sessionInfo[1].red)
+
+
+    const greenVal = document.getElementById("g_value").value;
+    sessionInfo[1].green = parseInt(greenVal);
+    console.log(sessionInfo[1].green)
+
+    const blueVal = document.getElementById("b_value").value;
+    sessionInfo[1].blue = parseInt(blueVal);
+    console.log(sessionInfo[1].blue)
+
+    const accuracy = compareRGB();
+    localStorage.setItem("score", accuracy);
+    sessionInfo[2].score = accuracy;
+    sessionInfo[2].username = localStorage.getItem("userName");
     localStorage.setItem('sessionInfo', JSON.stringify(sessionInfo));
     window.location.href = "scores.html";
 
