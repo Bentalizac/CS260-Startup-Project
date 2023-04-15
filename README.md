@@ -22,3 +22,7 @@ There are still some bugs and jankyness with the styling, but its starting to lo
 
 NOTES ON SIMON JS:
 It seems both really foreigh still, but also simple? Going over the provided code made me see where I need to watch to keep myself from overcomplicating this whole thing.
+
+NOTES ON STARTUP JAVASCRIPT: 
+I've been trying to catch up on this, but am finally moving cause my other classes finally gave me a break. I think I'm starting to get the hang of JS, it makes a bit more sense, but I think I'm barely scratching the surface of what it can do when you know how to use all the APIs and stuff.
+
