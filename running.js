@@ -2,7 +2,7 @@
 let sessionInfo = [
     {red: 0, green: 0, blue: 0},
     {red: 0, green: 0, blue: 0},
-    {username: localStorage.getItem("userName")}
+    {username: localStorage.getItem("userName"), score: 0}
   ];
 
 document.getElementById("usernameHere").append(sessionInfo[2].username);
@@ -36,8 +36,6 @@ function generateRandomInteger(max) {
     return Math.floor(Math.random() * max) + 1;
   }
   
- 
-
 function setRGB() {
 
     function RandRGB() {
