@@ -26,3 +26,5 @@ It seems both really foreigh still, but also simple? Going over the provided cod
 NOTES ON STARTUP JAVASCRIPT: 
 I've been trying to catch up on this, but am finally moving cause my other classes finally gave me a break. I think I'm starting to get the hang of JS, it makes a bit more sense, but I think I'm barely scratching the surface of what it can do when you know how to use all the APIs and stuff.
 
+SIMON SERVICES: 
+One thing I've learned is to not get behind... Also, I guess it hasn't quite clicked for me yet why we need to do all this, but I guess it makes it more efficient to run and is probably more secure.
