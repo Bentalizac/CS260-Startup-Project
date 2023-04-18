@@ -27,11 +27,45 @@ app.get('/sessionInfo/:username', async (req, res) => {
 // Update sessionInfo
 app.post('/saveInfo', async (req, res) => {
   const sessionInfo = req.body.sessionInfo;
-  await DB.addInfo(sessionInfo);
-  res.send('Session info saved successfully');
+  try {
+    await DB.addInfo(sessionInfo);
+    res.send('Session info saved successfully');
+  } catch (err) {
+    if (err.message.includes('ECONNREFUSED')) {
+      // if connection refused, store in local storage
+      localStorage.setItem('sessionInfo', JSON.stringify(sessionInfo));
+      res.send('Session info saved to localStorage');
+    } else {
+      // otherwise, re-throw the error
+      throw err;
+    }
+  }
 });
 
+/*      /saveInfo fetch call
+fetch('/saveInfo', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({sessionInfo})
+})
+.then(response => response.text())
+.then(data => console.log(data))
+.catch(error => console.error(error));
+*/
 
+
+app.get('/getInfo/:username', async (req, res) => {
+  try {
+    const username = req.params.username;
+    const result = await DB.getInfo(username);
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 
 app.post('/input/:data', async (req, res, next) => {

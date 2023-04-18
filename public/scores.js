@@ -1,6 +1,6 @@
    // Get the RGB values from the previous page
    const sessionInfo = JSON.parse(localStorage.getItem("sessionInfo"));
-   const userName = sessionInfo[2].username;
+   const userName = sessionInfo.username;
 
    // Get the scores table body element
    const scoresTableBody = document.getElementById("scores-table-body");

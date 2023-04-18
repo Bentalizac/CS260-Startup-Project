@@ -39,12 +39,18 @@ async function addItem(item) {
 }
 
 async function addInfo(item) {
-  const sessionInfo = JSON.stringify(item);
-  const result = await testCollection.insertOne({ username: item.username, sessionInfo });
+  const result = await testCollection.insertOne({ username: item[2].username, ...item });
   console.log(`Inserted document with _id: ${result.insertedId}`);
   
   const found = await testCollection.findOne({ _id: result.insertedId });
   console.log(`Found document: ${JSON.stringify(found)}`);
+}
+
+async function getInfo(username) {
+  const result = await testCollection.findOne({ username: username });
+  console.log(`Found document with username: ${username}`);
+
+  return JSON.stringify(result);
 }
 
 module.exports = {

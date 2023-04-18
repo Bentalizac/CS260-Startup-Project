@@ -1,10 +1,18 @@
-//const data = require('./database.js');
+// Retrieve the stored sessionInfo object from localStorage
+const storedSessionInfo = JSON.parse(localStorage.getItem("sessionInfo"));
 
-let sessionInfo = JSON.parse(localStorage.getItem("sessionInfo"));
+// Use the stored sessionInfo object
+console.log(storedSessionInfo.username); // Output: BEEE
+console.log(storedSessionInfo[0]); // Output: {red: 0, green: 0, blue: 0}
+console.log(storedSessionInfo[1]); // Output: {red: 0, green: 0, blue: 0}
+console.log(storedSessionInfo[2]); // Output: {username: "BEEE"}
+console.log(storedSessionInfo[3]); // Output: {score: 0}
 
-console.log(sessionInfo[2]);
+let username = storedSessionInfo[2].username;
+sessionInfo = storedSessionInfo;
 
-document.getElementById("usernameHere").append(sessionInfo[2].username);
+
+document.getElementById("usernameHere").append(username);
 
   const redSubmit = document.getElementById("r_button");
   redSubmit.addEventListener("click", event => {
@@ -92,7 +100,7 @@ async function scores() {
 
     const accuracy = compareRGB();
     localStorage.setItem("score", accuracy);
-    sessionInfo[2].score = accuracy;
+    sessionInfo.score = accuracy;
     //sessionInfo[2].username = localStorage.getItem("userName");
     localStorage.setItem('sessionInfo', JSON.stringify(sessionInfo));
 

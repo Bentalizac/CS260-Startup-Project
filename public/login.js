@@ -1,13 +1,10 @@
-
-
-
 let sessionInfo = [
   {red: 0, green: 0, blue: 0},
   {red: 0, green: 0, blue: 0},
-  {username:"BEEE", score: 0}
+  {username: "", score: 0}
 ];
 
-console.log("Running Node.js"); 
+console.log("Running Node.js");
 
 async function login() {
   // Get the username from the input field
@@ -25,10 +22,12 @@ async function login() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(sessionInfo)
+    body: JSON.({sessionInfo})
   })
+  .then(response => response.text())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
   
   // Navigate to the play page
   window.location.href = "play.html";
 }
-
