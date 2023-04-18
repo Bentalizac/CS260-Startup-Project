@@ -13,6 +13,8 @@
         />
 <link href="main.css" rel= "stylesheet"> </link>
 
+           <script type="text/javascript" src="login.js"></script>
+
     </head>
 
 
@@ -40,16 +42,18 @@
                 <h1> Welcome!</h1>
                 <p> Please provide a username to begin</p>
                 
-                <form method="get" action="play.html">
+                <form method="get">
                     <input type="text" id="username" name= "name" placeholder="Username Here" />
-                    <button type="submit" id="login" onclick="login()" class="btn btn-primary">Login</button>
-                </form>
+                  </form>
+                    <button type="button" id="login" onclick="login()" class="btn btn-primary">Login</button>
+                
             </div>
 
-            <script src="login.js"></script>
+ 
         </main>
 
     <footer class="bg-dark text-dark text-muted">
+      
         <div class="container-fluid">
           <span class="text-reset">Eli Ellsworth</span>
           <a
@@ -59,5 +63,6 @@
           >
         </div>
       </footer>
+     
     </body>
 </html>

@@ -1,9 +1,7 @@
 
-let sessionInfo = [
-    {red: 0, green: 0, blue: 0},
-    {red: 0, green: 0, blue: 0},
-    {username: localStorage.getItem("userName"), score: 0}
-  ];
+let sessionInfo = JSON.parse(localStorage.getItem("sessionInfo"));
+
+console.log(sessionInfo[2]);
 
 document.getElementById("usernameHere").append(sessionInfo[2].username);
 
