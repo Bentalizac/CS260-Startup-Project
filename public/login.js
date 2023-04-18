@@ -1,8 +1,4 @@
-let sessionInfo = [
-  {red: 0, green: 0, blue: 0},
-  {red: 0, green: 0, blue: 0},
-  {username: "", score: 0}
-];
+let sessionInfo = {username: "", score: 0, userRGB: [0, 0, 0], actualRGB: [0, 0, 0]};
 
 console.log("Running Node.js");
 
@@ -12,17 +8,19 @@ async function login() {
   console.log(username);
 
   // Update the sessionInfo object with the username
-  sessionInfo[2].username = username;
+  sessionInfo.username = username;
 
   // Store the sessionInfo object in localStorage
   localStorage.setItem("sessionInfo", JSON.stringify(sessionInfo));
 
+  debugger
+  
   fetch('/saveInfo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.({sessionInfo})
+    body: JSON.stringify( {sessionInfo} )
   })
   .then(response => response.text())
   .then(data => console.log(data))
