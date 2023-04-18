@@ -1,3 +1,6 @@
+
+
+
 let sessionInfo = [
   {red: 0, green: 0, blue: 0},
   {red: 0, green: 0, blue: 0},
@@ -6,7 +9,7 @@ let sessionInfo = [
 
 console.log("Running Node.js"); 
 
-function login() {
+async function login() {
   // Get the username from the input field
   let username = document.getElementById("username").value;
   console.log(username);
@@ -17,6 +20,14 @@ function login() {
   // Store the sessionInfo object in localStorage
   localStorage.setItem("sessionInfo", JSON.stringify(sessionInfo));
 
+  fetch('/saveInfo', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(sessionInfo)
+  })
+  
   // Navigate to the play page
   window.location.href = "play.html";
 }

@@ -2,9 +2,19 @@ const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 
+console.log(process.env.MONGOUSER);
+console.log(process.env.MONGOPASSWORD);
+console.log(process.env.MONGOHOSTNAME);
+
+
 const userName = process.env.MONGOUSER;
 const password = process.env.MONGOPASSWORD;
 const hostname = process.env.MONGOHOSTNAME;
+
+console.log(userName);
+console.log(password);
+console.log(hostname);
+
 
 if (!userName) {
   throw Error('Database not configured. Set environment variables');
@@ -12,68 +22,34 @@ if (!userName) {
 
 const url = `mongodb+srv://${userName}:${password}@${hostname}`;
 
+const client = new MongoClient(url);
+
 const userCollection = client.db('startup').collection('user');
 const scoreCollection = client.db('startup').collection('score');
+const testCollection = client.db('startup').collection('testing');
 
-async function createUser(email, password) {
-    // Hash the password before we insert it into the database
-    const passwordHash = await bcrypt.hash(password, 10);
+async function addItem(item) {
+  const result = await testCollection.insertOne({ message: item });
+  console.log(`Inserted document with _id: ${result.insertedId}`);
+
+  const found = await testCollection.findOne({ _id: result.insertedId });
+  console.log(`Found document: ${JSON.stringify(found)}`);
+
+  return found;
+}
+
+async function addInfo(item) {
+  const sessionInfo = JSON.stringify(item);
+  const result = await testCollection.insertOne({ username: item.username, sessionInfo });
+  console.log(`Inserted document with _id: ${result.insertedId}`);
   
-    const user = {
-      email: email,
-      password: passwordHash,
-      token: uuid.v4(),
-    };
-    await userCollection.insertOne(user);
-  
-    return user;
-  }
-
-  async function saveSessionInfo(sessionInfo) {
-    try {
-      const existingScore = await scoreCollection.findOne({ username: sessionInfo[2].username });
-  
-      if (existingScore) {
-        // Update existing score if it exists
-        await scoreCollection.updateOne(
-          { username: sessionInfo[2].username },
-          {
-            $set: {
-              score: sessionInfo[2].score,
-              userRGB: sessionInfo[1],
-              actualRGB: sessionInfo[0]
-            }
-          }
-        );
-      } else {
-        // Insert new score if it doesn't exist
-        const newScore = {
-          username: sessionInfo[2].username,
-          score: sessionInfo[2].score,
-          userRGB: sessionInfo[1],
-          actualRGB: sessionInfo[0]
-        };
-        await scoreCollection.insertOne(newScore);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-
-  function storeScores(score) {
-    scoreCollection.insertOne(score);  
-  }
-
-  function getRGB(username) {
-    return scoreCollection.findOne({username : username})
-  }
+  const found = await testCollection.findOne({ _id: result.insertedId });
+  console.log(`Found document: ${JSON.stringify(found)}`);
+}
 
 module.exports = {
 
-    saveSessionInfo,
-    storeScores,
-    getRGB,
-    createUser
+    addItem,
+    addInfo
 
  };

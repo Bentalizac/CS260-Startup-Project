@@ -1,4 +1,4 @@
-data = require('./database.js');
+//const data = require('./database.js');
 
 let sessionInfo = JSON.parse(localStorage.getItem("sessionInfo"));
 
@@ -75,7 +75,7 @@ colorSwatch.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
   }
   
 // STUFF FOR SCORES PAGE
-function scores() {
+async function scores() {
 
     const redVal = document.getElementById("r_value").value;
     sessionInfo[1].red = parseInt(redVal);
@@ -95,6 +95,15 @@ function scores() {
     sessionInfo[2].score = accuracy;
     //sessionInfo[2].username = localStorage.getItem("userName");
     localStorage.setItem('sessionInfo', JSON.stringify(sessionInfo));
+
+    fetch('/saveInfo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(sessionInfo)
+    })
+
     window.location.href = "scores.html";
 
 }
