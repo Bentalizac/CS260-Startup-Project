@@ -1,14 +1,14 @@
 // Retrieve the stored sessionInfo object from localStorage
 const storedSessionInfo = JSON.parse(localStorage.getItem("sessionInfo"));
-
+console.log("ENTERED RUNNING>JS");
+console.log(storedSessionInfo);
 // Use the stored sessionInfo object
 console.log(storedSessionInfo.username); // Output: BEEE
-console.log(storedSessionInfo[0]); // Output: {red: 0, green: 0, blue: 0}
-console.log(storedSessionInfo[1]); // Output: {red: 0, green: 0, blue: 0}
-console.log(storedSessionInfo[2]); // Output: {username: "BEEE"}
-console.log(storedSessionInfo[3]); // Output: {score: 0}
+console.log(storedSessionInfo.actualRGB); // Output: {red: 0, green: 0, blue: 0}
+console.log(storedSessionInfo.userRGB); // Output: {red: 0, green: 0, blue: 0}
+console.log(storedSessionInfo.score); // Output: {username: "BEEE"}
 
-let username = storedSessionInfo[2].username;
+let username = storedSessionInfo.username;
 sessionInfo = storedSessionInfo;
 
 
@@ -18,24 +18,24 @@ document.getElementById("usernameHere").append(username);
   redSubmit.addEventListener("click", event => {
     event.preventDefault();
     const redVal = document.getElementById("r_value").value;
-    sessionInfo[1].red = parseInt(redVal);
-    console.log(sessionInfo[1].red)
+    sessionInfo.userRGB[0] = parseInt(redVal);
+    console.log(sessionInfo.userRGB[0])
   });
 
   const greenSubmit = document.getElementById("g_button");
   greenSubmit.addEventListener("click", event => {
     event.preventDefault();
     const greenVal = document.getElementById("g_value").value;
-    sessionInfo[1].green = parseInt(greenVal);
-    console.log(sessionInfo[1].green)
+    sessionInfo.userRGB[1] = parseInt(greenVal);
+    console.log(sessionInfo.userRGB[1])
   });
 
   const blueSubmit = document.getElementById("b_button");
   blueSubmit.addEventListener("click", event => {
     event.preventDefault();
     const blueVal = document.getElementById("b_value").value;
-    sessionInfo[1].blue = parseInt(blueVal);
-    console.log(sessionInfo[1].blue)
+    sessionInfo.userRGB[2]= parseInt(blueVal);
+    console.log(sessionInfo.userRGB[2])
   });
 
 
@@ -53,9 +53,9 @@ function setRGB() {
     const blue = RandRGB();
     const green = RandRGB();
 
-    sessionInfo[0].red = red;
-    sessionInfo[0].green = green;
-    sessionInfo[0].blue = blue;
+    sessionInfo.actualRGB[0] = red;
+    sessionInfo.actualRGB[1] = green;
+    sessionInfo.actualRGB[2] = blue;
 
 // get the color swatch element
 const colorSwatch = document.getElementById("box");
@@ -65,13 +65,13 @@ colorSwatch.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
 
 }
   function compareRGB() {
-    const randRed = sessionInfo[0].red;
-    const randGreen = sessionInfo[0].green;
-    const randBlue = sessionInfo[0].blue;
+    const randRed = sessionInfo.actualRGB[0];
+    const randGreen = sessionInfo.actualRGB[1];
+    const randBlue = sessionInfo.actualRGB[2];
   
-    const userRed = sessionInfo[1].red;
-    const userGreen = sessionInfo[1].green;
-    const userBlue = sessionInfo[1].blue;
+    const userRed = sessionInfo.userRGB[0];
+    const userGreen = sessionInfo.userRGB[1];
+    const userBlue = sessionInfo.userRGB[2];
   
     const redDiff = Math.abs(randRed - userRed);
     const greenDiff = Math.abs(randGreen - userGreen);
@@ -86,17 +86,17 @@ colorSwatch.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
 async function scores() {
 
     const redVal = document.getElementById("r_value").value;
-    sessionInfo[1].red = parseInt(redVal);
-    console.log(sessionInfo[1].red)
+    sessionInfo.userRGB[0] = parseInt(redVal);
+    console.log(sessionInfo.userRGB[0])
 
 
     const greenVal = document.getElementById("g_value").value;
-    sessionInfo[1].green = parseInt(greenVal);
-    console.log(sessionInfo[1].green)
+    sessionInfo.userRGB[1] = parseInt(greenVal);
+    console.log(sessionInfo.userRGB[1])
 
     const blueVal = document.getElementById("b_value").value;
-    sessionInfo[1].blue = parseInt(blueVal);
-    console.log(sessionInfo[1].blue)
+    sessionInfo.userRGB[2] = parseInt(blueVal);
+    console.log(sessionInfo.userRGB[2])
 
     const accuracy = compareRGB();
     localStorage.setItem("score", accuracy);
@@ -109,7 +109,7 @@ async function scores() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(sessionInfo)
+      body: JSON.stringify({ sessionInfo })
     })
 
     window.location.href = "scores.html";

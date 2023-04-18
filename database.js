@@ -38,10 +38,13 @@ async function addItem(item) {
   return found;
 }
 
-async function addInfo(item) {
-  const result = await testCollection.insertOne({ username: item[2].username, ...item });
+// database.js
+async function addInfo(sessionInfo) {
+  //const testCollection = db.collection('test');
+
+  const result = await testCollection.insertOne(sessionInfo);
   console.log(`Inserted document with _id: ${result.insertedId}`);
-  
+
   const found = await testCollection.findOne({ _id: result.insertedId });
   console.log(`Found document: ${JSON.stringify(found)}`);
 }

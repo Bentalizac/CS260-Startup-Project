@@ -14,17 +14,17 @@
 
    // Add the randomly generated RGB values to the row
    const randomRgbCell = newRow.insertCell();
-   randomRgbCell.textContent = `(${sessionInfo[0].red}, ${sessionInfo[0].green}, ${sessionInfo[0].blue})`;
+   randomRgbCell.textContent = `(${sessionInfo.actualRGB[0]}, ${sessionInfo.actualRGB[1]}, ${sessionInfo.actualRGB[2]})`;
 
    // Add the color swatch to the row
    const colorSwatchCell = newRow.insertCell();
-   colorSwatchCell.style.backgroundColor = `rgb(${sessionInfo[0].red}, ${sessionInfo[0].green}, ${sessionInfo[0].blue})`;
+   colorSwatchCell.style.backgroundColor = `rgb(${sessionInfo.actualRGB[0]}, ${sessionInfo.actualRGB[1]}, ${sessionInfo.actualRGB[2]})`;
    colorSwatchCell.style.width = "100px";
    colorSwatchCell.style.height = "100px";
    
 
    let actualName = () => {
-      let url = 'https://www.thecolorapi.com/id?rgb=' + sessionInfo[0].red + ',' + sessionInfo[0].green + ',' + sessionInfo[0].blue +  '&format=json';
+      let url = 'https://www.thecolorapi.com/id?rgb=' + sessionInfo.actualRGB[0] + ',' + sessionInfo.actualRGB[1] + ',' + sessionInfo.actualRGB[2] +  '&format=json';
       return fetch(url)
         .then(response => {
           if (response.ok) {
@@ -55,20 +55,20 @@
 
    // Add the user-input RGB values to the row
    const userInputRgbCell = newRow.insertCell();
-   userInputRgbCell.textContent = `(${sessionInfo[1].red}, ${sessionInfo[1].green}, ${sessionInfo[1].blue})`;
+   userInputRgbCell.textContent = `(${sessionInfo.userRGB[0]}, ${sessionInfo.userRGB[1]}, ${sessionInfo.userRGB[2]})`;
 
    
   
 
    // Add the color swatch to the row
    const userSwatchCell = newRow.insertCell();
-   userSwatchCell.style.backgroundColor = `rgb(${sessionInfo[1].red}, ${sessionInfo[1].green}, ${sessionInfo[1].blue})`;
+   userSwatchCell.style.backgroundColor = `rgb(${sessionInfo.userRGB[0]}, ${sessionInfo.userRGB[1]}, ${sessionInfo.userRGB[2]})`;
    userSwatchCell.style.width = "100px";
    userSwatchCell.style.height = "100px";
 
 
    let userColor = () => {
-      let url = 'https://www.thecolorapi.com/id?rgb=' + sessionInfo[1].red + ',' + sessionInfo[1].green + ',' + sessionInfo[1].blue +  '&format=json';
+      let url = 'https://www.thecolorapi.com/id?rgb=' + sessionInfo.userRGB[0] + ',' + sessionInfo.userRGB[1] + ',' + sessionInfo.userRGB[2] +  '&format=json';
       return fetch(url)
         .then(response => {
           if (response.ok) {
@@ -98,5 +98,5 @@
 
    const accuracyCell = newRow.insertCell();
    //accuracyCell.textContent = (localStorage.getItem("score")*100) + "%";
-   accuracyCell.textContent = (sessionInfo[2].score*100) + "%";
+   accuracyCell.textContent = (sessionInfo.score*100) + "%";
 
