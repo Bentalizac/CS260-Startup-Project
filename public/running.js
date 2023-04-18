@@ -1,3 +1,5 @@
+data = require()
+
 
 let sessionInfo = JSON.parse(localStorage.getItem("sessionInfo"));
 

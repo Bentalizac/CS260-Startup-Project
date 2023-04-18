@@ -20,3 +20,4 @@ function login() {
   // Navigate to the play page
   window.location.href = "play.html";
 }
+
