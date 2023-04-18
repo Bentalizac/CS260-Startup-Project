@@ -92,7 +92,7 @@ function scores() {
     const accuracy = compareRGB();
     localStorage.setItem("score", accuracy);
     sessionInfo[2].score = accuracy;
-    sessionInfo[2].username = localStorage.getItem("userName");
+    //sessionInfo[2].username = localStorage.getItem("userName");
     localStorage.setItem('sessionInfo', JSON.stringify(sessionInfo));
     window.location.href = "scores.html";
 
