@@ -4,6 +4,8 @@ let sessionInfo = [
   {username:"BEEE", score: 0}
 ];
 
+console.log("Running Node.js"); 
+
 function login() {
   // Get the username from the input field
   let username = document.getElementById("username").value;
