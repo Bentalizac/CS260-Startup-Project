@@ -1,5 +1,4 @@
-data = require()
-
+data = require('./database.js');
 
 let sessionInfo = JSON.parse(localStorage.getItem("sessionInfo"));
 
