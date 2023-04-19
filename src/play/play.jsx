@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 
+let username = localStorage.getItem('username');
+
 const Play = ({ username, sessionInfo, addInfo, history }) => {
   const [red, setRed] = useState(0);
   const [green, setGreen] = useState(0);
@@ -86,4 +88,4 @@ const Play = ({ username, sessionInfo, addInfo, history }) => {
   );
 };
 
-export default Play;
+export { Play };
