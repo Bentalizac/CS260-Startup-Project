@@ -21,6 +21,7 @@ app.use(`/api`, apiRouter);
 
 app.get('/sessionInfo/:username', async (req, res) => {
   const sessionInfo = await DB.getInfo(req.params.username);
+  console.log(sessionInfo);
   res.send(sessionInfo);
 });
 

@@ -52,7 +52,7 @@ getAllInfo: async () => {
 async function addInfo(sessionInfo) {
   //const testCollection = db.collection('test');
 
-  const result = await testCollection.insertOne(sessionInfo);
+  const result = await scoreCollection.insertOne(sessionInfo);
   console.log(`Inserted document with _id: ${result.insertedId}`);
 
   const found = await testCollection.findOne({ _id: result.insertedId });
@@ -67,7 +67,7 @@ async function getInfo(username) {
 }
 
 module.exports = {
-
+    getInfo,
     addItem,
     addInfo
 
