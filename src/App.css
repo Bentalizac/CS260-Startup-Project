@@ -1,38 +1,65 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.swatch {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+ 
+#box{
+  width: 100px;
+  height: 100px;
+  display: flex;
+  background-color: black;
+
+
 }
 
-.App-link {
-  color: #61dafb;
+body {
+    display: flex;
+    flex-direction: column;
+    min-width: 375px;
+  }
+  
+  header {
+    flex: 0 80px;
+  }
+  
+  main {
+    flex: 1 calc(100vh - 110px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  footer {
+    flex: 0 30px;
+  }
+  
+  menu {
+    flex: 1;
+    display: flex;
+    /*  overwrite Bootstrap so the menu does not wrap */
+    flex-direction: column !important;
+    list-style: none;
+  }
+
+  .navbar-brand {
+    padding-left: 0.3em;
+    border-bottom: solid rgb(182, 182, 300) thin;
+  }
+
+  menu .nav-item {
+    padding: 0 0.3em;
+  }
+  
+  footer a {
+    float: right;
+  }
+.testing {
+  margin-top: 200px;
+} 
+
+.nav {
+  background-color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

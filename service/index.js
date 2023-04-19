@@ -5,6 +5,7 @@ const app = express();
 const DB = require('./database.js');
 
 const authCookieName = 'token';
+const saltRounds = 10; // number of rounds for password salting
 
 // The service port may be set on the command line
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -18,6 +19,89 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+// Register a new user
+app.post('/register', async (req, res) => {
+  const { username, password } = req.body;
+
+  // Hash the password with bcrypt
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+  try {
+    await DB.addUser(username, hashedPassword);
+    res.send('User registered successfully');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Log in a user
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Get the user's hashed password from the database
+    const user = await DB.getUser(username);
+    if (!user) {
+      // If the user doesn't exist, return an error message
+      res.status(401).send('Invalid username or password');
+      return;
+    }
+
+    // Compare the submitted password with the hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      // If the password doesn't match, return an error message
+      res.status(401).send('Invalid username or password');
+      return;
+    }
+
+    // Create an authentication token with a random value
+    const authToken = Math.random().toString(36).substring(2);
+
+    // Store the authentication token in the database
+    await DB.addAuthToken(username, authToken);
+
+    // Set the authentication token as an HTTP-only cookie
+    setAuthCookie(res, authToken);
+
+    // Return a success message
+    res.send('Logged in successfully');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Log out a user
+app.post('/logout', async (req, res) => {
+  const authToken = req.cookies[authCookieName];
+  if (!authToken) {
+    // If the user is not authenticated, return an error message
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  try {
+    // Remove the authentication token from the database
+    await DB.removeAuthToken(authToken);
+
+    // Clear the authentication token cookie
+    res.clearCookie(authCookieName);
+
+    // Return a success message
+    res.send('Logged out successfully');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/sessionInfo/:username', async (req, res) => {
+  const sessionInfo = await DB.getInfo(req.params.username);
+  console.log(sessionInfo);
+  res.send(sessionInfo);
+});
 
 app.get('/sessionInfo/:username', async (req, res) => {
   const sessionInfo = await DB.getInfo(req.params.username);
@@ -42,20 +126,6 @@ app.post('/saveInfo', async (req, res) => {
     }
   }
 });
-
-/*      /saveInfo fetch call
-fetch('/saveInfo', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({sessionInfo})
-})
-.then(response => response.text())
-.then(data => console.log(data))
-.catch(error => console.error(error));
-*/
-
 
 app.get('/getInfo/:username', async (req, res) => {
   try {
