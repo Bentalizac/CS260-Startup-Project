@@ -34,3 +34,9 @@ Checking the access settings in Mongo is important, also, its neat to see the JS
 
 SIMON LOGIN: 
 This one felt like an extension of the database part, just using a hash for security of the password and denying access to the play page if a login is unsuccessful.
+
+STARTUP SERVICES:
+This was interesting to see all of this come together, especially because I was fixing my startup and Simon at the same time so I really got to see what was going on. I just got to see it two weeks later than I should have.
+
+SIMON REACT:
+This one was really wildly different. I was expecting most of the structure to remain the same, but boy howdy was I wrong. There's a lot going on here and I'm just starting to put together how it works.
