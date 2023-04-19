@@ -2,7 +2,8 @@ import React from 'react';
 
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
-import { Play } from './play/play';
+import { Play } from "./play/play";
+
 import { Scores } from './scores/scores';
 import { AuthState } from './login/authState';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -74,13 +75,12 @@ function App() {
               onAuthChange={(userName, authState) => {
                 setAuthState(authState);
                 setUserName(userName);
+                localStorage.setItem({'username': userName});
               }}
             />
           }
         />
-        <Route path="/play">
-          <Play username={username} />
-        </Route>
+        
         <Route
           path='/play'
           
@@ -112,8 +112,8 @@ function App() {
             />
           }
         />
-        <Route path='/about' element={<About />} />
-        <Route path='*' element={<NotFound />} />
+         <Route path='*' element={<NotFound />} />
+
       </Routes>
 
         <footer className="bg-dark text-dark text-muted">
@@ -130,6 +130,9 @@ function App() {
 
     </div>
   );
+}
+function NotFound() {
+  return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
 }
 
 export default App;
