@@ -67,6 +67,15 @@ app.get('/getInfo/:username', async (req, res) => {
   }
 });
 
+app.get('/getAllInfo', async (req, res) => {
+  try {
+    const result = await DB.getAllInfo();
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 app.post('/input/:data', async (req, res, next) => {
   try {

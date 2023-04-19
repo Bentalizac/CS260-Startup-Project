@@ -38,6 +38,16 @@ async function addItem(item) {
   return found;
 }
 
+getAllInfo: async () => {
+  try {
+    const result = await testCollection.find({}, { _id: 0 });
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 // database.js
 async function addInfo(sessionInfo) {
   //const testCollection = db.collection('test');

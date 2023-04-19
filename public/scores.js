@@ -66,7 +66,6 @@
    userSwatchCell.style.width = "100px";
    userSwatchCell.style.height = "100px";
 
-
    let userColor = () => {
       let url = 'https://www.thecolorapi.com/id?rgb=' + sessionInfo.userRGB[0] + ',' + sessionInfo.userRGB[1] + ',' + sessionInfo.userRGB[2] +  '&format=json';
       return fetch(url)
@@ -100,3 +99,5 @@
    //accuracyCell.textContent = (localStorage.getItem("score")*100) + "%";
    accuracyCell.textContent = (sessionInfo.score*100) + "%";
 
+
+   
