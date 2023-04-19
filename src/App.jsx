@@ -8,30 +8,109 @@ import { AuthState } from './login/authState';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
+
 function App() {
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+
+  // Asynchronously determine if the user is authenticated by calling the service
+  const [authState, setAuthState] = React.useState(AuthState.Unknown);
+  React.useEffect(() => {
+    if (userName) {
+      fetch(`/api/user/${userName}`)
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          }
+        })
+        .then((user) => {
+          const state = user?.authenticated ? AuthState.Authenticated : AuthState.Unauthenticated;
+          setAuthState(state);
+        });
+    } else {
+      setAuthState(AuthState.Unauthenticated);
+    }
+  }, [userName]);
+
   return (
     <div className="bg-dark text-dark">
-        <header className="container-fluid">
-            <nav className="navbar fixed-top navbar-dark">
-                <a className="navbar-brand" href="#">Number by Paints</a>
-        <menu className="navbar-nav">
-          <li className="nav-item">
-            <a className="nav-link active" href="index.html">Home</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="play.html">Play</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="leaderboard.html">Leaderboard</a>
-          </li> 
-        </menu>
-            </nav>
-        </header>
+      <header className="container-fluid">
+        <nav className="navbar fixed-top navbar-dark">
+          <a className="navbar-brand" href="#">Number by Paints</a>
+          <menu className="navbar-nav">
+            <li className="nav-item">
+              <NavLink className="nav-link" to='/login'>
+                Login
+              </NavLink>
+            </li>
+            {authState === AuthState.Authenticated && (
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to='/play'>
+                    Play
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to='/scores'>
+                    Scores
+                  </NavLink>
+                </li>
+              </>
+            )}
+            <li className="nav-item">
+              <NavLink className="nav-link" to='/about'>
+                About
+              </NavLink>
+            </li>
+          </menu>
+        </nav>
+      </header>
 
-        <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/play" element={<Play />} />
-        <Route path="/leaderboard" element={<Scores />} />
+      <Routes>
+        <Route
+          path='/login'
+          element={
+            <Login
+              userName={userName}
+              authState={authState}
+              onAuthChange={(userName, authState) => {
+                setAuthState(authState);
+                setUserName(userName);
+              }}
+            />
+          }
+        />
+        <Route
+          path='/play'
+          element={
+            authState === AuthState.Authenticated ?
+            <Play userName={userName} /> :
+            <Login
+              userName={userName}
+              authState={authState}
+              onAuthChange={(userName, authState) => {
+                setAuthState(authState);
+                setUserName(userName);
+              }}
+            />
+          }
+        />
+        <Route
+          path='/scores'
+          element={
+            authState === AuthState.Authenticated ?
+            <Scores /> :
+            <Login
+              userName={userName}
+              authState={authState}
+              onAuthChange={(userName, authState) => {
+                setAuthState(authState);
+                setUserName(userName);
+              }}
+            />
+          }
+        />
+        <Route path='/about' element={<About />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
 
         <footer className="bg-dark text-dark text-muted">
