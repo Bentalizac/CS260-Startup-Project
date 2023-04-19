@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Login } from './login/login';
 import { Play } from "./play/play";
 
@@ -32,6 +33,7 @@ function App() {
   }, [userName]);
 
   return (
+    <Router>
     <div className="bg-dark text-dark">
       <header className="container-fluid">
         <nav className="navbar fixed-top navbar-dark">
@@ -129,6 +131,7 @@ function App() {
       </footer>
 
     </div>
+    </Router>
   );
 }
 function NotFound() {
