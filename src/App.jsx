@@ -8,7 +8,6 @@ import { AuthState } from './login/authState';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
-
 function App() {
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
 
@@ -79,8 +78,12 @@ function App() {
             />
           }
         />
+        <Route path="/play">
+          <Play username={username} />
+        </Route>
         <Route
           path='/play'
+          
           element={
             authState === AuthState.Authenticated ?
             <Play userName={userName} /> :
