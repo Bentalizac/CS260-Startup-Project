@@ -49,6 +49,20 @@ async function addInfo(sessionInfo) {
   console.log(`Found document: ${JSON.stringify(found)}`);
 }
 
+// database.js
+async function getAllSessionsSortedByScore() {
+  //const collection = client.db('startup').collection('sessionInfo');
+  const cursor = testCollection.find();
+  const sessionInfoArray = await cursor.toArray();
+  //console.log(Retrieved ${sessionInfoArray.length} documents from sessionInfo collection);
+  
+  const sortedSessionInfoArray = sessionInfoArray.sort((a, b) => {
+  return b.score - a.score;
+  });
+  
+  return sortedSessionInfoArray;
+  }
+
 async function getInfo(username) {
   const result = await testCollection.findOne({ username: username });
   console.log(`Found document with username: ${username}`);
@@ -56,9 +70,18 @@ async function getInfo(username) {
   return JSON.stringify(result);
 }
 
-module.exports = {
+async function getUserInfo(username) {
+  const result = await testCollection.find({ username: username });
+  console.log(`Found document with username: ${username}`);
 
+  return JSON.stringify(result);
+}
+
+module.exports = {
+  getAllSessionsSortedByScore,
+  getUserInfo,
     addItem,
-    addInfo
+    addInfo,
+    getInfo
 
  };

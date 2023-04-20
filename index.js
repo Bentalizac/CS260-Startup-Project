@@ -42,6 +42,16 @@ app.post('/saveInfo', async (req, res) => {
   }
 });
 
+app.get('/getAllInfo', async (req, res) => {
+  try {
+  const sortedSessionInfoArray = await DB.getAllSessionsSortedByScore();
+  res.json(sortedSessionInfoArray);
+  } catch (error) {
+  console.error(error);
+  res.status(500).json({ error: 'Internal server error' });
+  }
+  });
+
 /*      /saveInfo fetch call
 fetch('/saveInfo', {
   method: 'POST',
@@ -60,6 +70,17 @@ app.get('/getInfo/:username', async (req, res) => {
   try {
     const username = req.params.username;
     const result = await DB.getInfo(username);
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/getUserInfo/:username', async (req, res) => {
+  try {
+    const username = req.params.username;
+    const result = await DB.getUserInfo(username);
     res.json(result);
   } catch (error) {
     console.error(error);
