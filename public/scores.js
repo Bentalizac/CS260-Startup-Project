@@ -100,6 +100,8 @@
    //accuracyCell.textContent = (localStorage.getItem("score")*100) + "%";
    accuracyCell.textContent = (sessionInfo.score*100) + "%";
 
+   createLeaderboardForUser(userName)
+
    async function createLeaderboard() {
     // Fetch the session info array from the server
     const response = await fetch("/getAllInfo");
@@ -126,6 +128,7 @@
       // Add the username to the row
       const usernameCell = row.insertCell();
       usernameCell.textContent = sessionInfo.username;
+      
   
       // Add the actual RGB value to the row
       const actualRgbCell = row.insertCell();
@@ -137,8 +140,8 @@
       actualSwatchCell.style.width = "100px";
       actualSwatchCell.style.height = "100px";
       const actualColorName = await getColorName(sessionInfo.actualRGB);
-      actualSwatchCell.setAttribute('title', actualColorName);
-  
+      //actualSwatchCell.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">${actualColorName}<div style="background-color: white; width: 20px; height: 20px; margin-left: 5px;"></div></div>`;
+      actualSwatchCell.textContent = actualColorName;
       // Add the user RGB value to the row
       const userRgbCell = row.insertCell();
       userRgbCell.textContent = `(${sessionInfo.userRGB[0]}, ${sessionInfo.userRGB[1]}, ${sessionInfo.userRGB[2]})`;
@@ -149,24 +152,23 @@
       userSwatchCell.style.width = "100px";
       userSwatchCell.style.height = "100px";
       const userColorName = await getColorName(sessionInfo.userRGB);
-      userSwatchCell.setAttribute('title', userColorName);
-  
+      userSwatchCell.textContent = userColorName;
+      
       // Add the accuracy to the row
       const accuracyCell = row.insertCell();
       accuracyCell.textContent = `${(sessionInfo.score * 100).toFixed(2)}%`;
     }
   }
 
-
-
   async function createLeaderboardForUser(userName) {
     try {
       // Fetch the session info array for the specified user from the server
-      const response = await fetch(`/getUserInfo/${userId}`);
+      const response = await fetch(`/getUserInfo/${userName}`);
       if (!response.ok) {
         throw new Error(`Failed to fetch session info: ${response.status} ${response.statusText}`);
       }
       const sessionInfoArray = await response.json();
+      console.log("CREATELEADERBOARDFORUSER");
       console.log(sessionInfoArray);
   
       // Sort the session info array by score in descending order

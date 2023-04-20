@@ -31,7 +31,7 @@
             <a class="nav-link" href="play.html">Play</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+            <a class="nav-link" href="scores.html">Leaderboard</a>
           </li> 
         </menu>
             </nav>
@@ -40,12 +40,18 @@
         <main class="container-fluid bg-secondary text-center">
             <div>
                 <h1> Welcome!</h1>
-                <p> Please provide a username to begin</p>
+                <p> Please enter your username and password to begin</p>
                 
                 <form method="get">
-                    <input type="text" id="username" name= "name" placeholder="Username Here" />
+                    <input type="text" id="username" name= "name" placeholder="Username" />
+                    <p></p>
+                    <input type="password" id="password" name="password" placeholder="Password" />
                   </form>
+                  <p>
+
+                  </p>
                     <button type="button" id="login" onclick="login()" class="btn btn-primary">Login</button>
+                    <button type="button" id="register" onclick="newUser()" class="btn btn-success">Register</button>
                 
             </div>
 

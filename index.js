@@ -52,19 +52,28 @@ app.get('/getAllInfo', async (req, res) => {
   }
   });
 
-/*      /saveInfo fetch call
-fetch('/saveInfo', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({sessionInfo})
-})
-.then(response => response.text())
-.then(data => console.log(data))
-.catch(error => console.error(error));
-*/
 
+  app.get('/existingUser', async (req, res) => {
+    try {
+      const { username, password } = req.query;
+      const result = await existingUser(username, password);
+      res.json(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+  app.post('/createUser', async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const result = await createUser(username, password);
+      res.json(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 
 app.get('/getInfo/:username', async (req, res) => {
   try {
